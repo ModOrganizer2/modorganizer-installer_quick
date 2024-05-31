@@ -16,7 +16,7 @@ InstallerQuick::InstallerQuick()
 {
 }
 
-bool InstallerQuick::init(IOrganizer *moInfo)
+bool InstallerQuick::init(IOrganizer* moInfo)
 {
   m_MOInfo = moInfo;
   // Note: Cannot retrieve the checker here because the game might
@@ -105,11 +105,13 @@ std::shared_ptr<const IFileTree> InstallerQuick::getSimpleArchiveBase(
   }
   while (true) {
     if (checker->dataLooksValid(dataTree) == ModDataChecker::CheckReturn::VALID ||
-        isDataTextArchiveTopLayer(dataTree, dataFolderName, checker)) {
+      isDataTextArchiveTopLayer(dataTree, dataFolderName, checker)) {
       return dataTree;
-    } else if (dataTree->size() == 1 && dataTree->at(0)->isDir()) {
+    }
+    else if (dataTree->size() == 1 && dataTree->at(0)->isDir()) {
       dataTree = dataTree->at(0)->astree();
-    } else {
+    }
+    else {
       log::debug("Archive is not a simple archive.");
       return nullptr;
     }
@@ -119,7 +121,7 @@ std::shared_ptr<const IFileTree> InstallerQuick::getSimpleArchiveBase(
 
 bool InstallerQuick::isArchiveSupported(std::shared_ptr<const IFileTree> tree) const
 {
-  ModDataChecker* checker = m_MOInfo->managedGame()->feature<ModDataChecker>();
+  ModDataChecker* checker = m_MOInfo->gameFeatures()->gameFeature<ModDataChecker>();
   if (!checker) {
     return false;
   }
@@ -130,11 +132,11 @@ bool InstallerQuick::isArchiveSupported(std::shared_ptr<const IFileTree> tree) c
 }
 
 
-IPluginInstaller::EInstallResult InstallerQuick::install(GuessedValue<QString> &modName, std::shared_ptr<IFileTree> &tree,
-                                                         QString&, int&)
+IPluginInstaller::EInstallResult InstallerQuick::install(GuessedValue<QString>& modName, std::shared_ptr<IFileTree>& tree,
+  QString&, int&)
 {
   const QString dataFolderName = m_MOInfo->managedGame()->dataDirectory().dirName();
-  ModDataChecker* checker = m_MOInfo->managedGame()->feature<ModDataChecker>();
+  ModDataChecker* checker = m_MOInfo->gameFeatures()->gameFeature<ModDataChecker>();
 
   auto base = std::const_pointer_cast<IFileTree>(getSimpleArchiveBase(tree, dataFolderName, checker));
   if (base == nullptr) {
@@ -159,15 +161,18 @@ IPluginInstaller::EInstallResult InstallerQuick::install(GuessedValue<QString> &
         tree = dataTree;
       }
       return RESULT_SUCCESS;
-    } else {
+    }
+    else {
       if (dialog.manualRequested()) {
         modName.update(dialog.getName(), GUESS_USER);
         return RESULT_MANUALREQUESTED;
-      } else {
+      }
+      else {
         return RESULT_CANCELED;
       }
     }
-  } else {
+  }
+  else {
     // install shouldn't even have even have been called
     qCritical("unsupported archive for quick installer");
     return RESULT_FAILED;
