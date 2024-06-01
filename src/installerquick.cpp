@@ -1,11 +1,14 @@
 #include "installerquick.h"
-#include "simpleinstalldialog.h"
+
 #include "iplugingame.h"
+#include "igamefeatures.h"
+#include "log.h"
 
 #include <QtPlugin>
 #include <QDialog>
 
-#include "log.h"
+
+#include "simpleinstalldialog.h"
 
 
 using namespace MOBase;
