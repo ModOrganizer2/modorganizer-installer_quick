@@ -1,11 +1,11 @@
 #include "installerquick.h"
 
-#include "igamefeatures.h"
-#include "iplugingame.h"
-#include "log.h"
-
 #include <QDialog>
 #include <QtPlugin>
+
+#include <uibase/game_features/igamefeatures.h>
+#include <uibase/iplugingame.h>
+#include <uibase/log.h>
 
 #include "simpleinstalldialog.h"
 
@@ -65,7 +65,7 @@ bool InstallerQuick::isManualInstaller() const
 
 bool InstallerQuick::isDataTextArchiveTopLayer(std::shared_ptr<const IFileTree> tree,
                                                QString const& dataFolderName,
-                                               ModDataChecker* checker) const
+                                               ModDataChecker*) const
 {
   // A "DataText" archive is defined as having exactly one folder named like
   // `dataFolderName` and one or more "useless" files (text files, pdf, or images).
