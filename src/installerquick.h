@@ -1,15 +1,15 @@
 #ifndef INSTALLERQUICK_H
 #define INSTALLERQUICK_H
 
-#include <iplugininstallersimple.h>
-#include <moddatachecker.h>
+#include <uibase/game_features/moddatachecker.h>
+#include <uibase/iplugininstallersimple.h>
 
 class InstallerQuick : public MOBase::IPluginInstallerSimple
 {
   Q_OBJECT
   Q_INTERFACES(MOBase::IPlugin MOBase::IPluginInstaller MOBase::IPluginInstallerSimple)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-  Q_PLUGIN_METADATA(IID "org.tannin.InstallerQuick" FILE "installerquick.json")
+  Q_PLUGIN_METADATA(IID "org.tannin.InstallerQuick")
 #endif
 
 public:

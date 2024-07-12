@@ -21,7 +21,7 @@ along with Mod Organizer.  If not, see <http://www.gnu.org/licenses/>.
 #define SIMPLEINSTALLDIALOG_H
 
 #include <QDialog>
-#include <guessedvalue.h>
+#include <uibase/guessedvalue.h>
 
 namespace Ui
 {
