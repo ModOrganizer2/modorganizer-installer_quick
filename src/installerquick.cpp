@@ -133,7 +133,8 @@ InstallerQuick::install(GuessedValue<QString>& modName,
 
   auto base = std::const_pointer_cast<IFileTree>(
       getSimpleArchiveBase(tree, dataFolderName, checker.get()));
-  if (base == nullptr) {
+  if (base == nullptr &&
+      checker->dataLooksValid(tree) == ModDataChecker::CheckReturn::FIXABLE) {
     tree = checker->fix(tree);
   } else {
     tree = base;
